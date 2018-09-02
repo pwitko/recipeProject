@@ -18,5 +18,16 @@
 
 <br/>
 
+<div>
+    <table border="1">
+        <tr>
+            <th>IngredientName</th>
+        </tr>
+        <tr th:each="ingredient : ${ingredient}">
+            <td th:utext="${ingredient.ingredientName}">...</td>
+        </tr>
+    </table>
+</div>
+
 </body>
 </html>
