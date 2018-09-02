@@ -12,7 +12,7 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
-    @OneToMany
+    @ManyToMany
     @JoinColumn(name = "recipe_id")
     private List<Ingredient> IngredientList;
 

@@ -121,7 +121,7 @@ public class Controller {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "addRecipe")
-    public String addIngredientToRecipe(Model model, @ModelAttribute("recipeForm") RecipeForm recipeForm) {
+    public String addRecipe(Model model, @ModelAttribute("recipeForm") RecipeForm recipeForm) {
         IngredientForm ingredientForm = new IngredientForm();
         String recipeName = recipeForm.getRecipeName();
         String recipeDescription = recipeForm.getDescription();
@@ -148,4 +148,11 @@ public class Controller {
         return "recipeList";
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "deleteRecipe/{recipeId}")
+    public String deleteRecipe(Model model, @PathVariable Integer recipeId){
+        model.addAttribute("recipe", recipeCrudRepository.findById(recipeId));
+        Recipe recipe = recipeCrudRepository.findById(recipeId).get();
+        recipeCrudRepository.delete(recipe);
+        return "redirect:/recipeList";
+    }
 }

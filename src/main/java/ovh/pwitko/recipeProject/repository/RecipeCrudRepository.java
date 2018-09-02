@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface RecipeCrudRepository extends CrudRepository<Recipe, Integer> {
 
     Optional<Recipe> findById(Integer id);
+
 }

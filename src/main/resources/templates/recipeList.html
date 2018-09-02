@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Recipe List</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}" src="js/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}" src="js/bootstrap.min.js"></script>
+
 </head>
 <body>
-<h1>Recipe List List</h1>
-<a href="addRecipe">Add Recipe</a>
+<h1>Recipe List</h1>
+
 <br/><br/>
 <div>
     <table border="1">
@@ -19,8 +22,13 @@
             <td>
                 <a th:href="@{showRecipe/{id}(id=${recipe.id})}">show</a>
             </td>
+            <td>
+                <a th:href="@{deleteRecipe/{recipeId}(recipeId=${recipe.id})}">delete</a>
+            </td>
         </tr>
     </table>
+    <br/>
+    <a href="addRecipe">Add Recipe</a>
 </div>
 </body>
 </html>
