@@ -14,5 +14,6 @@ public interface IngredientServ {
 
     List<Ingredient> showAllIngredients();
 
+    void removeAllIngredients();
 
 }

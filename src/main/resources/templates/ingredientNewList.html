@@ -1,19 +1,27 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
 <head>
+    <meta charset="UTF-8"/>
+    <title>Ingredient List</title>
     <link rel="stylesheet" type="text/css" media="all" href="../../css/bootstrap.min.css"
           th:href="@{/css/bootstrap.min.css}"/>
     <script type="text/javascript" th:src="@{/js/jquery.min.js}" src="js/jquery.min.js"></script>
     <script type="text/javascript" th:src="@{/js/bootstrap.min.js}" src="js/bootstrap.min.js"></script>
 
-    <meta charset="UTF-8">
-    <title>Recipe</title>
 </head>
 <body>
-
-<h1>Welcome to my project! / Default View</h1>
-
-
+<h1>Ingredient List</h1>
+<a href="addIngredient">Add Ingredient</a>
+<br/><br/>
+<div>
+    <table border="1">
+        <tr>
+            <th>IngredientName</th>
+        </tr>
+        <tr th:each="ingredient : ${ingredientList}">
+            <td th:utext="${ingredient.ingredientName}">...</td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

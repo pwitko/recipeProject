@@ -26,7 +26,14 @@ public class IngredientService implements IngredientServ {
     }
 
     @Override
+    public void removeAllIngredients() {
+        ingredientList.clear();
+    }
+
+    @Override
     public void addIngredient(Ingredient ingredient) {
         ingredientList.add(ingredient);
     }
+
+
 }

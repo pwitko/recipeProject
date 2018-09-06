@@ -7,17 +7,13 @@ import ovh.pwitko.recipeProject.form.RecipeForm;
 import ovh.pwitko.recipeProject.model.Ingredient;
 import ovh.pwitko.recipeProject.form.IngredientForm;
 import ovh.pwitko.recipeProject.model.Recipe;
-import ovh.pwitko.recipeProject.repository.IngredientCrudRepository;
-import ovh.pwitko.recipeProject.repository.IngredientRepository;
-import ovh.pwitko.recipeProject.repository.RecipeCrudRepository;
-import ovh.pwitko.recipeProject.repository.RecipeRepository;
+import ovh.pwitko.recipeProject.repository.*;
 import ovh.pwitko.recipeProject.service.IngredientService;
 import ovh.pwitko.recipeProject.service.RecipeService;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 
 @org.springframework.stereotype.Controller
@@ -54,7 +50,7 @@ public class Controller {
 
     @GetMapping("/")
     public String form() {
-        return "index";
+        return "author";
     }
 
     @RequestMapping(value = "/author")
@@ -117,6 +113,8 @@ public class Controller {
         model.addAttribute("recipeForm", recipeForm);
         model.addAttribute("ingredientForm", ingredientForm);
         model.addAttribute("ingredient", ingredientService.showAllIngredients());
+
+
         return "addRecipe";
     }
 
@@ -129,16 +127,20 @@ public class Controller {
         String preparationTime = recipeForm.getPreparationTime();
         model.addAttribute("ingredientForm", ingredientForm);
         List ingredientList = new ArrayList();
-        ingredientList.addAll((Collection) ingredientCrudRepository.findAll());
+        ingredientList.addAll(ingredientService.showAllIngredients());
         Recipe newRecipe = new Recipe(ingredientList, recipeDescription, recipeName, preparationTime, peopleQuantity);
         recipeCrudRepository.save(newRecipe);
+        ingredientService.removeAllIngredients();
         return "redirect:/recipeList";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "showRecipe/{recipeId}")
-    public String showRecipe(Model model,@PathVariable Integer recipeId) {
+    public String showRecipe(Model model, @PathVariable Integer recipeId) {
         model.addAttribute("recipe", recipeCrudRepository.findById(recipeId).get());
         model.addAttribute("ingredient", ingredientCrudRepository.findAll());
+//        model.addAttribute("ingredient", ingredientCrudRepository.findByRecipeId(recipeId));
+//        model.addAttribute("ingredient", recipeCrudRepository.findIngredientListById(recipeId));
+
         return "recipeView";
     }
 
@@ -149,10 +151,11 @@ public class Controller {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "deleteRecipe/{recipeId}")
-    public String deleteRecipe(Model model, @PathVariable Integer recipeId){
+    public String deleteRecipe(Model model, @PathVariable Integer recipeId) {
         model.addAttribute("recipe", recipeCrudRepository.findById(recipeId));
         Recipe recipe = recipeCrudRepository.findById(recipeId).get();
         recipeCrudRepository.delete(recipe);
         return "redirect:/recipeList";
     }
+
 }

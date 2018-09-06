@@ -3,57 +3,58 @@
 <html lang="en">
 <head>
 
-    <link rel="stylesheet" type="text/css" media="all" href="../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css" media="all" href="../../css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}"/>
     <script type="text/javascript" th:src="@{/js/jquery.min.js}" src="js/jquery.min.js"></script>
     <script type="text/javascript" th:src="@{/js/bootstrap.min.js}" src="js/bootstrap.min.js"></script>
     <meta charset="UTF-8">
-    <title>Recipe</title>
+    <title>Recipe View</title>
 
 </head>
 <body>
+<div th:style="'padding: 16px'">
+    <h3>Recipe View</h3>
 
-<h3>Widok przepisu</h3>
+    <div>
+        <table>
+            <tr>
+                <th>Recipe Name</th>
+            </tr>
+            <td th:utext="${recipe.recipeName}"></td>
 
-<div>
-    <table>
-        <tr>
-            <th>Recipe Name</th>
-        </tr>
-        <td th:utext="${recipe.recipeName}"></td>
+        </table>
+        <table border="1">
+            <tr>
+                <th>Ingredient List</th>
+            </tr>
+            <tr th:each="ingredient : ${ingredient}">
+                <td th:utext="${ingredient.ingredientName}">...</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th>Preparation Time</th>
+            </tr>
+            <tr>
+                <td th:utext="${recipe.preparationTime}"></td>
+            </tr>
+            <tr>
+                <th>People Quantity</th>
+            </tr>
+            <tr>
+                <td th:utext="${recipe.peopleQuantity}"></td>
+            </tr>
+            <tr>
+                <th>Recipe Description</th>
+            </tr>
+            <tr>
+                <td th:utext="${recipe.description}"></td>
+            </tr>
 
-    </table>
-    <table border="1">
-        <tr>
-            <th>Ingredient List</th>
-        </tr>
-        <tr th:each="ingredient : ${ingredient}">
-            <td th:utext="${ingredient.ingredientName}">...</td>
-        </tr>
-    </table>
-    <table>
-        <tr>
-            <th>Preparation Time</th>
-        </tr>
-        <tr>
-            <td th:utext="${recipe.preparationTime}"></td>
-        </tr>
-        <tr>
-            <th>People Quantity</th>
-        </tr>
-        <tr>
-            <td th:utext="${recipe.peopleQuantity}"></td>
-        </tr>
-        <tr>
-            <th>Recipe Description</th>
-        </tr>
-        <tr>
-            <td th:utext="${recipe.description}"></td>
-        </tr>
-
-    </table>
+        </table>
+    </div>
+    <br/>
+    <br/>
 </div>
-<br/>
-<br/>
-
 </body>
 </html>

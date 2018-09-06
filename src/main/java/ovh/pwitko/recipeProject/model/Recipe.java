@@ -12,10 +12,11 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
-    @ManyToMany
+    @OneToMany
     @JoinColumn(name = "recipe_id")
     private List<Ingredient> IngredientList;
 
+    @Lob
     private String description;
     private String recipeName;
     private String preparationTime;
