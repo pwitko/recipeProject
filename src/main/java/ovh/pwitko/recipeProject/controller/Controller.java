@@ -58,6 +58,10 @@ public class Controller {
         return "author";
     }
 
+    @RequestMapping(value = "/bootTest")
+    public String bootTest() {
+        return "bootTest";
+    }
 
     @GetMapping("/ingredientList")
     public String ingredientList(Model model) {
@@ -157,6 +161,17 @@ public class Controller {
         Recipe recipe = recipeCrudRepository.findById(recipeId).get();
         recipeCrudRepository.delete(recipe);
         return "redirect:/recipeList";
+    }
+
+    @RequestMapping(value = {"/editRecipe/{recipeId}"}, method = RequestMethod.GET)
+    public String editRecipe(Model model, @PathVariable Integer recipeId) {
+        IngredientForm ingredientForm = new IngredientForm();
+        RecipeForm recipeForm = new RecipeForm();
+        model.addAttribute("recipeForm", recipeForm);
+        model.addAttribute("ingredientForm", ingredientForm);
+        model.addAttribute("recipe", recipeCrudRepository.findById(recipeId).get());
+        model.addAttribute("ingredient", recipeCrudRepository.findById(recipeId).get().getIngredientList());
+        return "editRecipe";
     }
 
 }

@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add Recipe</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../../css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}" src="js/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}" src="js/bootstrap.min.js"></script>
+</head>
+<body>
+<div th:style="'padding: 16px'">
+    <h4>Create Recipe</h4>
+    </br>
+    <h5>Add Ingredient to list:</h5>
+    <form th:action="@{/addIng}"
+          th:object="${ingredientForm}" method="POST">
+        Put ingredient name:
+        <input type="text" th:field="*{ingredientName}" required/>
+        <br/>
+        <input type="submit" value="Add ingredient"/>
+    </form>
+    <br/>
+
+    <div>
+        <table border="1">
+            <tr>
+                <th>IngredientName</th>
+            </tr>
+            <tr th:each="ingredient : ${ingredient}">
+                <td th:utext="${ingredient.ingredientName}"></td>
+            </tr>
+        </table>
+    </div>
+    <br/>
+    <br/>
+
+    <form th:action="@{/addRecipe}"
+          th:object="${recipeForm}" method="POST">
+        Recipe Name:
+        <br/>
+        <input type="text" th:field="*{recipeName}"/>
+        <br/>
+        People Quantity:
+        <br/>
+        <input type="text" th:field="*{peopleQuantity}"/>
+        <br/>
+        Preparation Time:
+        <br/>
+        <input type="text" th:field="*{preparationTime}"/>
+        <br/>
+        Description:
+        <br/>
+        <textarea rows="10" cols="70" th:field="*{description}"/>
+
+        </textarea>
+
+        <br/>
+        <input type="submit" value="Create"/>
+    </form>
+
+</div>
+</body>
+</html>
