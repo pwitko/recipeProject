@@ -51,7 +51,10 @@
         <br/>
         Description:
         <br/>
-        <input type="text" th:field="*{description}" required/>
+        <textarea rows="10" cols="70" th:field="*{description}"/>
+            <!--<input type="text" th:field="*{description}"/>-->
+        </textarea>
+
         <br/>
         <input type="submit" value="Create"/>
     </form>

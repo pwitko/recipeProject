@@ -137,7 +137,8 @@ public class Controller {
     @RequestMapping(method = RequestMethod.GET, value = "showRecipe/{recipeId}")
     public String showRecipe(Model model, @PathVariable Integer recipeId) {
         model.addAttribute("recipe", recipeCrudRepository.findById(recipeId).get());
-        model.addAttribute("ingredient", ingredientCrudRepository.findAll());
+//        model.addAttribute("ingredient", ingredientCrudRepository.findAll());
+        model.addAttribute("ingredient", recipeCrudRepository.findById(recipeId).get().getIngredientList());
 //        model.addAttribute("ingredient", ingredientCrudRepository.findByRecipeId(recipeId));
 //        model.addAttribute("ingredient", recipeCrudRepository.findIngredientListById(recipeId));
 

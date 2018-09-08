@@ -48,12 +48,17 @@
                 <th>Recipe Description</th>
             </tr>
             <tr>
-                <td th:utext="${recipe.description}"></td>
-            </tr>
+                <td> <pre th:utext="${recipe.description}"></pre></td>
 
+            </tr>
         </table>
     </div>
     <br/>
+    <h6>
+        <form th:action="@{/recipeList}">
+            <input type="submit" value="Go back to recipe List."/>
+        </form>
+    </h6>
     <br/>
 </div>
 </body>
