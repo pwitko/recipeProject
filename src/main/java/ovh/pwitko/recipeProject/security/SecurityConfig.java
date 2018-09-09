@@ -13,8 +13,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .headers().frameOptions().disable()
+                .and()
                 .authorizeRequests()
-                .antMatchers("/author").permitAll()
+                .antMatchers("/index").permitAll()
                 .antMatchers("/recipeProject/**").hasRole("USER")
                 .and()
                 .formLogin()

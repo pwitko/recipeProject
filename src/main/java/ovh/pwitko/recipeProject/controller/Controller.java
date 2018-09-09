@@ -38,21 +38,21 @@ public class Controller {
     protected IngredientCrudRepository ingredientCrudRepository;
 
     @GetMapping("/")
-    public String form() {
-        return "redirect:author";
+    public String index() {
+        return "redirect:index";
     }
 
-    @RequestMapping(value = "/author")
+    @GetMapping(value = "/index")
     public String author() {
-        return "author";
+        return "index";
     }
 
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String login() {
         return "login";
     }
 
-    @RequestMapping("/login-error")
+    @GetMapping("/login-error")
     public String loginError(Model model) {
         model.addAttribute("loginError", true);
         return "login";
