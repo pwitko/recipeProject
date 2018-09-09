@@ -22,15 +22,15 @@
             <tr th:each="recipe : ${recipeList}">
                 <td th:utext="${recipe.recipeName}">...</td>
                 <td>
-                    <a th:href="@{showRecipe/{id}(id=${recipe.id})}">show</a>
+                    <a th:href="@{/recipeProject/showRecipe/{id}(id=${recipe.id})}">show</a>
                 </td>
                 <td>
-                    <a th:href="@{deleteRecipe/{recipeId}(recipeId=${recipe.id})}">delete</a>
+                    <a th:href="@{/recipeProject/deleteRecipe/{recipeId}(recipeId=${recipe.id})}">delete</a>
                 </td>
             </tr>
         </table>
         <br/>
-        <a href="addRecipe">Add Recipe</a>
+        <a href="/recipeProject/addRecipe">Add Recipe</a>
     </div>
 </div>
 </body>

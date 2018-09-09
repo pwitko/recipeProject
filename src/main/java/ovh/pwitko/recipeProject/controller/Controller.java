@@ -37,20 +37,9 @@ public class Controller {
     @Autowired
     protected IngredientCrudRepository ingredientCrudRepository;
 
-    @GetMapping("/findById/{id}")
-    public String findIngredientById(@PathVariable Integer id) {
-        return ingredientRepository.findById(id).toString();
-    }
-
-    @GetMapping("/save/{ingredientName}")
-    public String saveIngredient(@PathVariable String ingredientName) {
-        ingredientCrudRepository.save(new Ingredient(ingredientName));
-        return "ingredientList";
-    }
-
     @GetMapping("/")
     public String form() {
-        return "author";
+        return "redirect:author";
     }
 
     @RequestMapping(value = "/author")
@@ -58,45 +47,18 @@ public class Controller {
         return "author";
     }
 
-    @RequestMapping(value = "/bootTest")
-    public String bootTest() {
-        return "bootTest";
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
     }
 
-    @GetMapping("/ingredientList")
-    public String ingredientList(Model model) {
-        model.addAttribute("ingredient", ingredientService.showAllIngredients());
-        return "ingredientList";
+    @RequestMapping("/login-error")
+    public String loginError(Model model) {
+        model.addAttribute("loginError", true);
+        return "login";
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/addIngredient/{ingredientName}")
-    public void addIngredientToList(@PathVariable String ingredientName) {
-        ingredientService.addIngredient(ingredientName);
-    }
-
-    @RequestMapping(value = {"/addIngredient"}, method = RequestMethod.GET)
-    public String showAddIngredientPage(Model model) {
-        IngredientForm ingredientForm = new IngredientForm();
-        model.addAttribute("ingredientForm", ingredientForm);
-        model.addAttribute("ingredient", ingredientService.showAllIngredients());
-        return "addIngredient";
-    }
-
-    @RequestMapping(value = {"/addIngredient"}, method = RequestMethod.POST)
-    public String addIngredient(Model model, @ModelAttribute("ingredientForm") IngredientForm ingredientForm) {
-
-        String ingredientName = ingredientForm.getIngredientName();
-
-        if (ingredientName != null && ingredientName.length() > 0) {
-            Ingredient newIngredient = new Ingredient(ingredientName);
-            ingredientService.addIngredient(newIngredient);
-            ingredientCrudRepository.save(newIngredient);
-            return "redirect:/addIngredient";
-        }
-        return "addIngredient";
-    }
-
-    @RequestMapping(value = {"/addIng"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"recipeProject/addIng"}, method = RequestMethod.POST)
     public String addIng(Model model, @ModelAttribute("ingredientForm") IngredientForm ingredientForm) {
 
         String ingredientName = ingredientForm.getIngredientName();
@@ -105,12 +67,12 @@ public class Controller {
             Ingredient newIngredient = new Ingredient(ingredientName);
             ingredientService.addIngredient(newIngredient);
             ingredientCrudRepository.save(newIngredient);
-            return "redirect:/addRecipe";
+            return "redirect:/recipeProject/addRecipe";
         }
-        return "addRecipe";
+        return "redirect:/recipeProject/addRecipe";
     }
 
-    @RequestMapping(value = {"/addRecipe"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/recipeProject/addRecipe"}, method = RequestMethod.GET)
     public String showAddRecipePage(Model model) {
         IngredientForm ingredientForm = new IngredientForm();
         RecipeForm recipeForm = new RecipeForm();
@@ -122,7 +84,7 @@ public class Controller {
         return "addRecipe";
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "addRecipe")
+    @RequestMapping(method = RequestMethod.POST, value = "recipeProject/addRecipe")
     public String addRecipe(Model model, @ModelAttribute("recipeForm") RecipeForm recipeForm) {
         IngredientForm ingredientForm = new IngredientForm();
         String recipeName = recipeForm.getRecipeName();
@@ -135,35 +97,31 @@ public class Controller {
         Recipe newRecipe = new Recipe(ingredientList, recipeDescription, recipeName, preparationTime, peopleQuantity);
         recipeCrudRepository.save(newRecipe);
         ingredientService.removeAllIngredients();
-        return "redirect:/recipeList";
+        return "redirect:/recipeProject/recipeList";
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "showRecipe/{recipeId}")
+    @RequestMapping(method = RequestMethod.GET, value = "recipeProject/showRecipe/{recipeId}")
     public String showRecipe(Model model, @PathVariable Integer recipeId) {
         model.addAttribute("recipe", recipeCrudRepository.findById(recipeId).get());
-//        model.addAttribute("ingredient", ingredientCrudRepository.findAll());
         model.addAttribute("ingredient", recipeCrudRepository.findById(recipeId).get().getIngredientList());
-//        model.addAttribute("ingredient", ingredientCrudRepository.findByRecipeId(recipeId));
-//        model.addAttribute("ingredient", recipeCrudRepository.findIngredientListById(recipeId));
-
         return "recipeView";
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "recipeList")
+    @RequestMapping(method = RequestMethod.GET, value = "recipeProject/recipeList")
     public String showRecipeList(Model model) {
         model.addAttribute("recipeList", recipeCrudRepository.findAll());
         return "recipeList";
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "deleteRecipe/{recipeId}")
+    @RequestMapping(method = RequestMethod.GET, value = "recipeProject/deleteRecipe/{recipeId}")
     public String deleteRecipe(Model model, @PathVariable Integer recipeId) {
         model.addAttribute("recipe", recipeCrudRepository.findById(recipeId));
         Recipe recipe = recipeCrudRepository.findById(recipeId).get();
         recipeCrudRepository.delete(recipe);
-        return "redirect:/recipeList";
+        return "redirect:/recipeProject/recipeList";
     }
 
-    @RequestMapping(value = {"/editRecipe/{recipeId}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/recipeProject/editRecipe/{recipeId}"}, method = RequestMethod.GET)
     public String editRecipe(Model model, @PathVariable Integer recipeId) {
         IngredientForm ingredientForm = new IngredientForm();
         RecipeForm recipeForm = new RecipeForm();

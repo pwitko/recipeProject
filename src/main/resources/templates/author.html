@@ -71,7 +71,7 @@
             <small>It is a place where you can save your recipes.</small>
         </h6>
         <h6>
-            <small>I have created this using Spring Boot, Hibernate, MySql, Thymeleaf, Bootstrap.</small>
+            <small>I have created this using Spring Boot, Spring Security, Hibernate, MySql, Thymeleaf, Bootstrap.</small>
         </h6>
     </div>
     </br>
@@ -84,7 +84,13 @@
             <small>Search possibility</small>
         </h6>
         <h6>
-            <small>Spring Security</small>
+            <small>User registration</small>
+        </h6>
+        <h6>
+            <small>Personalized recipe book</small>
+        </h6>
+        <h6>
+            <small>Image add possibility</small>
         </h6>
         <h6>Other Bigger ToDo: module with wine recipe</h6>
         <h6>
@@ -102,7 +108,7 @@
     </div>
     </br>
     <h6>
-        <form th:action="@{/recipeList}">
+        <form th:action="@{/recipeProject/recipeList}">
             <input type="submit" value="Go and see or add some recipes"/>
         </form>
     </h6>

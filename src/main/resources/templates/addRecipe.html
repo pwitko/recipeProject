@@ -13,7 +13,7 @@
     <h4>Create Recipe</h4>
     </br>
     <h5>Add Ingredient to list:</h5>
-    <form th:action="@{/addIng}"
+    <form th:action="@{/recipeProject/addIng}"
           th:object="${ingredientForm}" method="POST">
         Put ingredient name:
         <input type="text" th:field="*{ingredientName}" required/>
@@ -35,7 +35,7 @@
     <br/>
     <br/>
 
-    <form th:action="@{/addRecipe}"
+    <form th:action="@{/recipeProject/addRecipe}"
           th:object="${recipeForm}" method="POST">
         Recipe Name:
         <br/>
