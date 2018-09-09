@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8"/>
     <title>Recipe List</title>
@@ -32,6 +32,18 @@
         <br/>
         <a href="/recipeProject/addRecipe">Add Recipe</a>
     </div>
+</div>
+</br>
+
+<div th:fragment="logout" class="logout" sec:authorize="isAuthenticated()">
+    Logged in user: <span sec:authentication="name"></span> |
+    Roles: <span sec:authentication="principal.authorities"></span>
+    <div>
+        <form action="#" th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout"/>
+        </form>
+    </div>
+</div>
 </div>
 </body>
 </html>
