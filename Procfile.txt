@@ -1,0 +1,1 @@
+web: java -war target/recipeProject-0.0.1-SNAPSHOT.war
